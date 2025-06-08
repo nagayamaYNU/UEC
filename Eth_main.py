@@ -614,7 +614,7 @@ def letsgo(n):
     generate_links(n)
     build_graph()
 
-# レッツゴー！！！（実験に必要なデータを登録してグラフを作成する）
+# 実験に必要なデータを登録してグラフを作成する
 letsgo(15625)
 print(router_info)
 print(link_info)
@@ -658,7 +658,6 @@ with cefpyco.create_handle() as handle:
                     print("queryです")
                     arg_s = re.split("/", info.name)#arg_s[0] = "ccnx:", arg_s[1] = "query", arg_s[2] = <function_name>, arg_s[3]以降に引数
                     if("regist_C" in info.name):#ccnx:/query/regist_C/コンテンツ名/組織/[避けたい属性]/登録ルータID(1つ)
-                        # この通信は使ってません
                         print("regist_C received")
                         print("コンテンツ名",arg_s[3])
                         print("組織",arg_s[4])
@@ -679,7 +678,6 @@ with cefpyco.create_handle() as handle:
 
                     
                     elif("mkgraph" in info.name):#グラフ作成用
-                        # この通信は使ってません
                         print("mkgraph received")#ccnx:/query/mkgraph
                         # num_routers = 4  # 必要に応じてルータ数を設定
                         # num_links = 5    # 必要に応じてリンク数を設定
@@ -755,10 +753,6 @@ with cefpyco.create_handle() as handle:
                                     receiver_thread.start()
                                     receiver_thread.join()
                                     print("別スレをちゃんと抜けられた!")
-
-
-                                #相手からInterestが送られてきたとき、下にあるdataパケットを送信したいがどうする？
-                                #並列さぎょうするために別スレッド（pyてょんにコマンドあり）を立てるか、まつ。(メインが止まって困らないならまつ)
                                 # handle.send_data(info.name, addroute , chunk_num=info.chunk_num, expiry=3600000, cache_time=0)
                             
                                     
